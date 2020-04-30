@@ -5,7 +5,7 @@ all_tags=`git tag -l | wc -l`
 if [ $all_tags = 0 ]  || [  $all_tags = 1 ]
 then
 
-  printf `git rev-list --max-parents=0 master`
+  printf `git rev-list --max-parents=0 HEAD`
 
 else
 
