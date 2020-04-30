@@ -1,0 +1,22 @@
+name: Beagle Release
+
+on:
+    push:
+        tags:
+            - '*'
+jobs:
+    generate-release:
+        name: Generate release
+        runs-on: macos-latest
+        steps:
+            - uses: actions/checkout@v2.1.0
+            - name: Install Fastlane
+              run: bundle install
+            - name: Deploy new version
+              env:
+                REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+                NAME_REPO_TOKEN: ${{ secrets.NAME_REPO_TOKEN }}
+                GITHUB_USER: ${{ secrets.NAME_REPO_TOKEN }}
+                GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+              run: bundle exec fastlane deploy
+        
