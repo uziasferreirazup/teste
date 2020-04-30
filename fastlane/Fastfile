@@ -8,10 +8,13 @@ end
 
 desc "Publish new release based on last two tags"
 lane :deploy do
+
   git_pull(only_tags: true)
+
   ENV["VERSION_DEPLOY"] = last_git_tag
 
   sh "bash ./delete_release.sh"
+
   set_github_release(
     repository_name: "uziasferreirazup/teste",
     api_token: ENV["REPO_TOKEN"],
